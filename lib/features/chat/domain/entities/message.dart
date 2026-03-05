@@ -1,0 +1,17 @@
+class Message {
+  final String id;
+  final String senderId;
+  final String senderName;
+  final String text;
+  final DateTime timestamp;
+  final bool isMine;
+
+  const Message({
+    required this.id,
+    required this.senderId,
+    required this.senderName,
+    required this.text,
+    required this.timestamp,
+    this.isMine = false,
+  });
+}
