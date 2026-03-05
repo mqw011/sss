@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/entities/message.dart';
 import '../../data/repositories/mock_chat_repository.dart';
 
-final chatRepositoryProvider = Provider<IChatRepository>((ref) {
+final chatRepositoryProvider = Provider<MockChatRepository>((ref) {
   return MockChatRepository();
 });
 

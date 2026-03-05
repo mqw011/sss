@@ -5,7 +5,6 @@ import 'features/genres/presentation/screens/genres_screen.dart';
 
 void main() {
   runApp(
-    // Wrap the app with ProviderScope for Riverpod
     const ProviderScope(
       child: MyApp(),
     ),
@@ -18,22 +17,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '999 Music Hub',
-      debugShowCheckedModeBanner: false,
+      title: '999 Digital Archive',
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: AppColors.background,
+        scaffoldBackgroundColor: AppColors.backgroundDark,
         colorScheme: const ColorScheme.dark(
-          primary: AppColors.accentNeonPurple,
-          secondary: AppColors.accentCyan,
-          surface: AppColors.surface,
-          error: AppColors.error,
+          primary: AppColors.primary,
+          secondary: AppColors.neonCyan,
+          surface: AppColors.backgroundDark,
+          error: Colors.redAccent,
         ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-        useMaterial3: true,
       ),
       home: const GenresScreen(),
     );

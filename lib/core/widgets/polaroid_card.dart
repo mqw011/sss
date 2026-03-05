@@ -8,6 +8,7 @@ class PolaroidCard extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
   final double angle;
+  final bool compact; // For grid layout vs detail view
 
   const PolaroidCard({
     super.key,
@@ -16,6 +17,7 @@ class PolaroidCard extends StatelessWidget {
     required this.title,
     required this.onTap,
     this.angle = 0.0,
+    this.compact = true,
   });
 
   @override
@@ -27,54 +29,57 @@ class PolaroidCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: AppColors.polaroidWhite,
-            borderRadius: BorderRadius.circular(2), // Very slight physical rounding
+            borderRadius: BorderRadius.circular(2),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.8),
-                blurRadius: 24,
-                spreadRadius: -2,
-                offset: const Offset(0, 12),
-              ),
-              BoxShadow(
-                color: Colors.white.withValues(alpha: 0.1),
-                blurRadius: 1,
-                spreadRadius: 1,
-                offset: const Offset(0, 0), // Slight top highlight
+                color: Colors.black.withValues(alpha: 0.5),
+                blurRadius: compact ? 20 : 30,
+                offset: Offset(0, compact ? 4 : 10),
               ),
             ],
           ),
-          padding: const EdgeInsets.only(
-            left: 10,
-            right: 10,
-            top: 10,
-            bottom: 32, // More pronounced bottom
+          padding: EdgeInsets.only(
+            left: compact ? 12 : 16,
+            right: compact ? 12 : 16,
+            top: compact ? 12 : 16,
+            bottom: compact ? 32 : 48,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
+              AspectRatio(
+                aspectRatio: 1, // aspect-square
                 child: Hero(
                   tag: heroTag,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: AppColors.surface, // Placeholder if no image
-                      border: Border.all(color: Colors.black12, width: 0.5), // Inner photo border
+                      color: const Color(0xFFE2E8F0), // slate-200
                       image: DecorationImage(
                         image: NetworkImage(imageUrl),
                         fit: BoxFit.cover,
                       ),
                     ),
+                    // Adds a slight grain overlay effect using ColorFilter in decoration or just let it be
                   ),
                 ),
               ),
-              const SizedBox(height: 18),
+              SizedBox(height: compact ? 8 : 24),
               Text(
-                title,
-                style: AppTextStyles.polaroidMarker,
+                compact ? title : "Subj: ${title.toUpperCase().replaceAll('\n', ' ')}",
+                style: compact ? AppTextStyles.polaroidMarker : AppTextStyles.polaroidCaveat,
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
+              if (!compact) ...[
+                const SizedBox(height: 4),
+                Text(
+                  "Sector 04 - Captured 1989/09/09",
+                  style: AppTextStyles.polaroidCaveat.copyWith(fontSize: 14, color: Colors.blueGrey),
+                  textAlign: TextAlign.center,
+                ),
+              ]
             ],
           ),
         ),

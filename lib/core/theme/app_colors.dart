@@ -3,20 +3,13 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  static const Color background = Color(0xFF0D0D0D);
-  static const Color surface = Color(0xFF141415); // Slightly lighter than background for depth
-  static const Color surfaceLight = Color(0xFF1F1F20); // For list items
+  static const Color backgroundDark = Color(0xFF0D0D0D);
+  static const Color primary = Color(0xFF6C0DF2);
+  static const Color neonPurple = Color(0xFFBC13FE);
+  static const Color neonCyan = Color(0xFF00FFFF);
+  static const Color polaroidWhite = Color(0xFFF7F5F8);
 
-  static const Color accentNeonPurple = Color(0xFFBB86FC);
-  static const Color accentCyan = Color(0xFF03DAC6);
-
-  static const Color error = Color(0xFFCF6679);
-
-  // Polaroid paper is rarely pure white, usually slightly warm/grey
-  static const Color polaroidWhite = Color(0xFFF5F5F3);
-
-  // Text Colors
-  static const Color textPrimary = Colors.white;
-  static const Color textSecondary = Color(0xFFA0A0A0); // Softer gray
-  static const Color textDark = Color(0xFF1A1A1B); // For polaroid text
+  static const Color textPrimary = Color(0xFFF1F5F9); // slate-100
+  static const Color textSecondary = Color(0xFF94A3B8); // slate-400
+  static const Color textDark = Color(0xFF0F172A); // slate-900
 }
